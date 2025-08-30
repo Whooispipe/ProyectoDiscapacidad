@@ -27,15 +27,19 @@ public class Main{
             {
                 case 1:
                     //Agregar Beneficiario
+                    limpiarPantalla()
                     break;
                 case 2:
                     //Modificar Beneficiario
+                    limpiarPantalla()
                     break;
                 case 3:
                     //Eliminar Beneficiario
+                    limpiarPantalla()
                     break;
                 case 4:
                     //Listar Beneficiarios
+                    limpiarPantalla()
                     break;
                 case 5:
                     System.out.println("Saliendo del programa...");
