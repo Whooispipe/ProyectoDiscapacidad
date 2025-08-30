@@ -1,12 +1,10 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.Reader;
-//import java.util.HashMap;
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Main{
-    //private HashMap<String, Beneficiario> beneficiario;
+    private static HashMap<String, Beneficiario> beneficiarios = new HashMap<>();
 
     
     public static void main(String[] args) {
@@ -26,7 +24,8 @@ public class Main{
             switch(opcion)
             {
                 case 1:
-                    //Agregar Beneficiario
+                    
+                    agregarBeneficiario(br);
                     limpiarPantalla();
                     break;
                 case 2:
@@ -61,6 +60,25 @@ public class Main{
         System.out.println("4. Listar Beneficiarios");
         System.out.println("5. Salir");
     }
+    public static void agregarBeneficiario(BufferedReader br) {
+        try {
+            System.out.print("Ingrese RUT: ");
+            String rut = br.readLine();
+            System.out.print("Ingrese Nombre: ");
+            String nombre = br.readLine();
+            System.out.print("Ingrese Fecha de Nacimiento (dd/mm/yyyy): ");
+            String fechaNacimiento = br.readLine();
+            System.out.print("Ingrese Tipo de Discapacidad: ");
+            String discapacidad = br.readLine();
+
+            Beneficiario nuevoBeneficiario = new Beneficiario(rut, nombre, fechaNacimiento, discapacidad);
+            beneficiarios.put(rut, nuevoBeneficiario);
+            System.out.println("Beneficiario agregado exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al leer la entrada. Intente de nuevo.");
+        }
+    }
+
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J"); 
         System.out.flush(); 
@@ -69,3 +87,4 @@ public class Main{
 
     
 }
+
