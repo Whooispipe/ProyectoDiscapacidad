@@ -28,7 +28,7 @@ public class Main {
                     limpiarPantalla();
                     break;
                 case 4:
-                    // Listar Beneficiarios
+                    mostrarbeneficiarios();
                     limpiarPantalla();
                     break;
                 case 5:
@@ -93,7 +93,19 @@ public class Main {
             System.out.println("Beneficiario modificado exitosamente.");
         }
     }
-
+    public static void mostrarbeneficiarios() {
+        if (beneficiarios.isEmpty()) {
+            System.out.println("No hay beneficiarios registrados.");
+            return;
+        }
+        for (Beneficiario b : beneficiarios.values()) {
+            System.out.println("RUT: " + b.getRut());
+            System.out.println("Nombre: " + b.getNombre());
+            System.out.println("Fecha de Nacimiento: " + b.getFechaNacimiento());
+            System.out.println("Discapacidad: " + b.getDiscapacidad());
+            System.out.println("---------------------------");
+        }
+    }
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
