@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 //import java.util.HashMap;
 import java.io.BufferedReader;
-
+import java.io.IOException;
 
 public class Main{
     //private HashMap<String, Beneficiario> beneficiario;
@@ -57,7 +57,10 @@ public class Main{
         System.out.println("4. Listar Beneficiarios");
         System.out.println("5. Salir");
     }
-
+    public static void limpiarPantalla() {
+        System.out.print("\033[H\033[2J"); 
+        System.out.flush(); 
+    }
 
 
     
