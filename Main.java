@@ -20,7 +20,7 @@ public class Main {
                     limpiarPantalla();
                     break;
                 case 2:
-                    // Modificar Beneficiario
+                    ModificarBeneficiario(br);
                     limpiarPantalla();
                     break;
                 case 3:
@@ -64,8 +64,40 @@ public class Main {
         System.out.println("Beneficiario agregado exitosamente.");
     }
 
+    public static void ModificarBeneficiario(BufferedReader br) throws IOException {
+        System.out.print("Ingrese RUT: ");
+        String rutInput = br.readLine();
+        Beneficiario encontrado = beneficiarios.get(rutInput);
+        if (encontrado == null) {
+            System.out.println("Beneficiario no encontrado.");
+            return;
+        } else {
+            System.out.print("Ingrese Nuevo Nombre (enter para mantener actual: " + encontrado.getNombre() + "): ");
+            String nombres = br.readLine();
+            System.out.print("Ingrese Nueva Fecha de Nacimiento (dd/mm/yyyy) (enter para mantener actual: " + encontrado.getFechaNacimiento() + "): ");
+            String fechaNacimientos = br.readLine();
+            System.out.print("Ingrese Nuevo Tipo de Discapacidad (enter para mantener actual: " + encontrado.getDiscapacidad() + "): ");
+            String discapacidadd = br.readLine();
+
+            if (nombres != null && !nombres.isEmpty()) {
+                encontrado.setNombre(nombres);
+            }
+            if (fechaNacimientos != null && !fechaNacimientos.isEmpty()) {
+                encontrado.setFechaNacimiento(fechaNacimientos);
+            }
+            if (discapacidadd != null && !discapacidadd.isEmpty()) {
+                encontrado.setDiscapacidad(discapacidadd);
+            }
+
+            beneficiarios.put(rutInput, encontrado);
+            System.out.println("Beneficiario modificado exitosamente.");
+        }
+    }
+
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+}
     }
 }
