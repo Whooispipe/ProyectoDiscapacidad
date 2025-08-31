@@ -252,6 +252,20 @@ public class Main{
         }
     }
 
+    public static void listarNotas(){
+        for (Beneficiario b : beneficiarios.values()){
+            System.out.println("Beneficiario: " + b.getNombre() + " (" + b.getRut() + ")");
+            if (b.getSeguimientoImpacto().isEmpty()) {
+                System.out.println("  No tiene notas registradas.");
+            } else {
+                for (SeguimientoImpacto s : b.getSeguimientoImpacto()) {
+                    System.out.println("  - Nota: " + s.getEfecto());
+                }
+            }
+            System.out.println("---------------------------");
+        }
+    } 
+
     // Funciones de utilidad
     // Para limpiar pantalla y poder avanzar con una tecla
     public static void limpiarPantalla() {
