@@ -291,20 +291,40 @@ public class Main{
     }
 
     public static void listarNotas(String rut){
-    Beneficiario b = beneficiarios.get(rut);
-    if (b == null){
-        System.out.println("Beneficiario no encontrado.");
-        return;
-    }
-    System.out.println("Notas de " + b.getNombre() + " (" + b.getRut() + "):");
-    if (b.getSeguimientoImpacto().isEmpty()) {
-        System.out.println("  No tiene notas registradas.");
-    } else {
-        for (SeguimientoImpacto s : b.getSeguimientoImpacto()) {
-            System.out.println("  - Nota: " + s.getEfecto());
+        Beneficiario b = beneficiarios.get(rut);
+        if (b == null){
+            System.out.println("Beneficiario no encontrado.");
+            return;
+        }
+        System.out.println("Notas de " + b.getNombre() + " (" + b.getRut() + "):");
+        if (b.getSeguimientoImpacto().isEmpty()) {
+            System.out.println("  No tiene notas registradas.");
+        } else {
+            for (SeguimientoImpacto s : b.getSeguimientoImpacto()) {
+                System.out.println("  - Nota: " + s.getEfecto());
+            }
         }
     }
-}
+    
+    public static void listarNotas(String rut, String filtro){
+        Beneficiario b = beneficiarios.get(rut);
+        if (b == null){
+            System.out.println("Beneficiario no encontrado.");
+            return;
+        }
+        System.out.println("Notas (" + filtro + ") de " + b.getNombre() + " (" + b.getRut() + "):");
+        boolean found = false;
+        for (SeguimientoImpacto s : b.getSeguimientoImpacto()) {
+            if (s.getEfecto().equalsIgnoreCase(filtro)) {
+                System.out.println("  - Nota: " + s.getEfecto());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("  No tiene notas de tipo " + filtro + ".");
+        }
+    }
+
 
     // Funciones de utilidad
     // Para limpiar pantalla y poder avanzar con una tecla
