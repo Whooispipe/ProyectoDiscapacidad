@@ -17,19 +17,15 @@ public class Main {
             switch (opcion) {
                 case 1:
                     agregarBeneficiario(br);
-                    limpiarPantalla();
                     break;
                 case 2:
                     ModificarBeneficiario(br);
-                    limpiarPantalla();
                     break;
                 case 3:
                     // Eliminar Beneficiario
-                    limpiarPantalla();
                     break;
                 case 4:
                     mostrarbeneficiarios();
-                    limpiarPantalla();
                     break;
                 case 5:
                     System.out.println("Saliendo del programa...");
@@ -38,6 +34,8 @@ public class Main {
                 default:
                     System.out.println("Opcion no valida. Intente de nuevo.");
             }
+        presioneParaContinuar();
+        limpiarPantalla();
         }
     }
 
@@ -52,22 +50,30 @@ public class Main {
     public static void agregarBeneficiario(BufferedReader br) throws IOException {
         System.out.print("Ingrese RUT: ");
         String rut = br.readLine();
-        System.out.print("Ingrese Nombre: ");
-        String nombre = br.readLine();
-        System.out.print("Ingrese Fecha de Nacimiento (dd/mm/yyyy): ");
-        String fechaNacimiento = br.readLine();
-        System.out.print("Ingrese Tipo de Discapacidad: ");
-        String discapacidad = br.readLine();
+        if(beneficiarios.get(rut) == null){
+            System.out.print("Ingrese Nombre: ");
+            String nombre = br.readLine();
 
-        Beneficiario nuevoBeneficiario = new Beneficiario(rut, nombre, fechaNacimiento, discapacidad);
-        beneficiarios.put(rut, nuevoBeneficiario);
-        System.out.println("Beneficiario agregado exitosamente.");
+            System.out.print("Ingrese Fecha de Nacimiento (dd/mm/yyyy): ");
+            String fechaNacimiento = br.readLine();
+
+            System.out.print("Ingrese Tipo de Discapacidad: ");
+            String discapacidad = br.readLine();
+
+            Beneficiario nuevoBeneficiario = new Beneficiario(rut, nombre, fechaNacimiento, discapacidad);
+            beneficiarios.put(rut, nuevoBeneficiario);
+            System.out.println("Beneficiario agregado exitosamente.");
+        }
+        else{
+            System.out.println(("EL rut ya esta registrado..."));
+        }
     }
 
     public static void ModificarBeneficiario(BufferedReader br) throws IOException {
         System.out.print("Ingrese RUT: ");
         String rutInput = br.readLine();
         Beneficiario encontrado = beneficiarios.get(rutInput);
+        
         if (encontrado == null) {
             System.out.println("Beneficiario no encontrado.");
             return;
@@ -93,6 +99,7 @@ public class Main {
             System.out.println("Beneficiario modificado exitosamente.");
         }
     }
+
     public static void mostrarbeneficiarios() {
         if (beneficiarios.isEmpty()) {
             System.out.println("No hay beneficiarios registrados.");
@@ -106,9 +113,16 @@ public class Main {
             System.out.println("---------------------------");
         }
     }
+
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void presioneParaContinuar() throws IOException {
+        System.out.print("Presione Enter para continuar...");
+        while (System.in.read() != '\n') {
+        }
     }
 }
     
