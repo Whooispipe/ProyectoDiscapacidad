@@ -3,18 +3,45 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class Main {
+public class Main{
     private static HashMap<String, Beneficiario> beneficiarios = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
-            mostrarMenu();
+
+            MenuAdministrador();
+            
             System.out.print("Seleccione una opcion: ");
             int opcion = Integer.parseInt(br.readLine());
 
             switch (opcion) {
+                case 1:
+                    limpiarPantalla();
+                    mostrarMenuBeneficiario();
+                    opcionadministrador(br);
+                    break;
+                case 2:
+                    // Apartado de Servicios
+                    break;
+               
+                case 3:
+                    System.out.println("Saliendo del programa...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opcion no valida. Intente de nuevo.");
+            }
+        presioneParaContinuar();
+        limpiarPantalla();
+        }
+    }
+    public static void opcionadministrador(BufferedReader br) throws IOException
+    {   
+        System.out.print("Seleccione una opcion del apartado Beneficiarios: ");
+        int n = Integer.parseInt(br.readLine());
+        switch (n){
                 case 1:
                     agregarBeneficiario(br);
                     break;
@@ -34,12 +61,20 @@ public class Main {
                 default:
                     System.out.println("Opcion no valida. Intente de nuevo.");
             }
-        presioneParaContinuar();
-        limpiarPantalla();
-        }
-    }
+        // pausa y limpieza se realizan en el main para evitar duplicar
 
-    public static void mostrarMenu() {
+
+    }
+    public static void MenuAdministrador()
+    {
+        System.out.println("=== Menu Administrador ===");
+        System.out.println("1) Apartado de Beneficiarios");
+        System.out.println("2) Apartado de Servicios");
+        System.out.println("3) Salir");
+
+    }
+    public static void mostrarMenuBeneficiario() {
+        System.out.println("=== Menu Beneficiarios ===");
         System.out.println("1. Agregar Beneficiario");
         System.out.println("2. Modificar Beneficiario");
         System.out.println("3. Eliminar Beneficiario");
@@ -114,6 +149,12 @@ public class Main {
         }
     }
 
+
+
+
+
+    // Funciones de utilidad
+    // Para limpiar pantalla y poder avanzar con una tecla
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
