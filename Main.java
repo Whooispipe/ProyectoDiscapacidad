@@ -164,6 +164,15 @@ public class Main{
         }
     }
 
+    public static void mostrarMenuServicios() {
+        System.out.println("=== Menu Servicios y Notas ===");
+        System.out.println("1. Agregar Servicio de Apoyo");
+        System.out.println("2. Agregar Nota");
+        System.out.println("3. Listar Servicios de Apoyo");
+        System.out.println("4. Listar Notas");
+        System.out.println("5. Salir");
+    }
+
     public static void opcionServicios(BufferedReader br) throws IOException {
         System.out.print("Seleccione una opcion del apartado Servicios y Notas: ");
         int n = Integer.parseInt(br.readLine());
@@ -190,17 +199,26 @@ public class Main{
                 
     }
 
-    public static void mostrarMenuServicios() {
-        System.out.println("=== Menu Servicios y Notas ===");
-        System.out.println("1. Agregar Servicio de Apoyo");
-        System.out.println("Opciones: Fisioterapia, Terapia Ocupacional, Psicologia, Logopedia, Transporte Especializado, Insercion Laboral, Otro");
-        System.out.println("2. Agregar Nota");
-        System.out.println("3. Listar Servicios de Apoyo");
-        System.out.println("4. Listar Notas");
-        System.out.println("5. Salir");
+    public static void agregarServicioApoyo(BufferedReader br) throws IOException {
+        System.out.print("Ingrese RUT del beneficiario: "); 
+        String rut = br.readLine();
+        Beneficiario b = beneficiarios.get(rut);
+
+        if (b == null){
+            System.out.println("Beneficiario no encontrado.");
+            return;
+        }
+        System.out.println("Opciones de Servicio: Fisioterapia, Terapia Ocupacional, Psicologia, Asistencia Laboral, Transporte Especializado, Logopedia, Otro");
+        System.out.print("Ingrese Tipo de Servicio: ");
+        String tipoServicio = br.readLine();
+
+        System.out.print("Ingrese Descripcion: ");
+        String descripcion = br.readLine();
+
+        ServiciodeApoyo nuevoServicio = new ServiciodeApoyo(tipoServicio, descripcion);
+        b.getServiciosDeApoyo().add(nuevoServicio);
+        System.out.println("Servicio de Apoyo agregado exitosamente.");
     }
-
-
 
     // Funciones de utilidad
     // Para limpiar pantalla y poder avanzar con una tecla
