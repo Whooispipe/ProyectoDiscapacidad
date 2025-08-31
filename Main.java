@@ -237,6 +237,21 @@ public class Main{
         System.out.println("Nota agregada exitosamente.");
     }
 
+    public static void listarServiciosApoyo(){
+        for (Beneficiario b : beneficiarios.values()){
+            System.out.println("Beneficiario: " + b.getNombre() + " (" + b.getRut() + ")");
+            if (b.getServiciosDeApoyo().isEmpty()) {
+                System.out.println("  No tiene servicios de apoyo.");
+            } else {
+                for (ServiciodeApoyo s : b.getServiciosDeApoyo()) {
+                    System.out.println("  - " + s.getTipoServicio() + ": " + s.getDescripcion());
+                }
+            }
+            System.out.println("---------------------------");
+
+        }
+    }
+
     // Funciones de utilidad
     // Para limpiar pantalla y poder avanzar con una tecla
     public static void limpiarPantalla() {
