@@ -234,6 +234,9 @@ public class Main{
             System.out.println("Beneficiario no encontrado.");
             return;
         }
+        ServiciodeApoyo nuevoServicio = new ServiciodeApoyo(tipoServicio, descripcion);
+        b.getServiciosDeApoyo().add(nuevoServicio);
+        System.out.println("Servicio de Apoyo agregado exitosamente.");
     }
 
     public static void agregarNota(BufferedReader br) throws IOException {
