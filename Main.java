@@ -225,9 +225,15 @@ public class Main{
         System.out.print("Ingrese Descripcion: ");
         String descripcion = br.readLine();
 
-        ServiciodeApoyo nuevoServicio = new ServiciodeApoyo(tipoServicio, descripcion);
-        b.getServiciosDeApoyo().add(nuevoServicio);
-        System.out.println("Servicio de Apoyo agregado exitosamente.");
+        agregarServicioApoyo(rut, tipoServicio, descripcion);
+    }
+
+    public static void agregarServicioApoyo(String rut, String tipoServicio, String descripcion){
+        Beneficiario b = beneficiarios.get(rut);
+        if(b == null){
+            System.out.println("Beneficiario no encontrado.");
+            return;
+        }
     }
 
     public static void agregarNota(BufferedReader br) throws IOException {
