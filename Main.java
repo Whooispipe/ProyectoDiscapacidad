@@ -8,7 +8,7 @@ public class Main{
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        llenarcondatosdepruebea();
         while (true) {
 
             MenuAdministrador();
@@ -39,6 +39,17 @@ public class Main{
         presioneParaContinuar();
         limpiarPantalla();
         }
+    }
+    public static void llenarcondatosdepruebea()
+    {
+        Beneficiario b1 = new Beneficiario("12345678-9", "Juan Perez", "15/04/1980", "Visual");
+        Beneficiario b2 = new Beneficiario("98765432-1", "Maria Gomez", "22/11/1990", "Auditiva");
+        Beneficiario b3 = new Beneficiario("11111111-1", "Pedro Martinez", "05/06/1975", "Motriz");
+        Beneficiario b4 = new Beneficiario("22222222-2", "Ana Torres", "30/09/1985", "Cognitiva");
+        beneficiarios.put(b1.getRut(), b1);
+        beneficiarios.put(b2.getRut(), b2);
+        beneficiarios.put(b3.getRut(), b3);
+        beneficiarios.put(b4.getRut(), b4);
     }
     public static void opcionadministrador(BufferedReader br) throws IOException
     {   
