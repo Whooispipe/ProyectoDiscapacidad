@@ -49,7 +49,7 @@ public class Main{
                     ModificarBeneficiario(br);
                     break;
                 case 3:
-                    // Eliminar Beneficiario
+                    eliminarbeneficiario(br);
                     break;
                 case 4:
                     mostrarbeneficiarios();
@@ -64,6 +64,17 @@ public class Main{
         // pausa y limpieza se realizan en el main para evitar duplicar
 
 
+    }
+    public static void eliminarbeneficiario(BufferedReader br) throws IOException {
+        System.out.print("Ingrese RUT del beneficiario a eliminar: ");
+        String rutInput = br.readLine();
+        Beneficiario eliminado = beneficiarios.remove(rutInput);
+        
+        if (eliminado == null) {
+            System.out.println("Beneficiario no encontrado.");
+        } else {
+            System.out.println("Beneficiario eliminado exitosamente.");
+        }
     }
     public static void MenuAdministrador()
     {
