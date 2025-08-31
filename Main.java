@@ -80,7 +80,7 @@ public class Main{
 
     }
     public static void eliminarbeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT del beneficiario a eliminar: ");
+        System.out.print("Ingrese RUT del beneficiario a eliminar(con este formato 11111111-4): ");
         String rutInput = br.readLine();
         Beneficiario eliminado = beneficiarios.remove(rutInput);
         
@@ -108,7 +108,7 @@ public class Main{
     }
 
     public static void agregarBeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT: ");
+        System.out.print("Ingrese RUT(con este formato 11111111-4): ");
         String rut = br.readLine();
         if(beneficiarios.get(rut) == null){
             System.out.print("Ingrese Nombre: ");
@@ -131,7 +131,7 @@ public class Main{
     }
 
     public static void ModificarBeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT: ");
+        System.out.print("Ingrese RUT(con este formato 11111111-4): ");
         String rutInput = br.readLine();
         Beneficiario encontrado = beneficiarios.get(rutInput);
         
@@ -210,7 +210,7 @@ public class Main{
     }
 
     public static void agregarServicioApoyo(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT del beneficiario: "); 
+        System.out.print("Ingrese RUT(con este formato 11111111-4):  "); 
         String rut = br.readLine();
         Beneficiario b = beneficiarios.get(rut);
 
@@ -231,7 +231,7 @@ public class Main{
     }
 
     public static void agregarNota(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT del beneficiario: "); 
+        System.out.print("Ingrese RUT(con este formato 11111111-4):  "); 
         String rut = br.readLine();
         Beneficiario b = beneficiarios.get(rut);
 
