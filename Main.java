@@ -195,8 +195,7 @@ public class Main{
                 return;
             default:
                 System.out.println("Opcion no valida. Intente de nuevo.");
-        }
-                
+        } 
     }
 
     public static void agregarServicioApoyo(BufferedReader br) throws IOException {
@@ -218,6 +217,24 @@ public class Main{
         ServiciodeApoyo nuevoServicio = new ServiciodeApoyo(tipoServicio, descripcion);
         b.getServiciosDeApoyo().add(nuevoServicio);
         System.out.println("Servicio de Apoyo agregado exitosamente.");
+    }
+
+    public static void agregarNota(BufferedReader br) throws IOException {
+        System.out.print("Ingrese RUT del beneficiario: "); 
+        String rut = br.readLine();
+        Beneficiario b = beneficiarios.get(rut);
+
+        if (b == null){
+            System.out.println("Beneficiario no encontrado.");
+            return;
+        }
+
+        System.out.print("Ingrese Contenido de la Nota (Positivo/Negativo): ");
+        String contenido = br.readLine();
+
+        SeguimientoImpacto nuevaNota = new SeguimientoImpacto(contenido);
+        b.getSeguimientoImpacto().add(nuevaNota);
+        System.out.println("Nota agregada exitosamente.");
     }
 
     // Funciones de utilidad
