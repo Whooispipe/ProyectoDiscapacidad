@@ -24,6 +24,9 @@ public class Main{
                     break;
                 case 2:
                     // Apartado de Servicios
+                    limpiarPantalla();
+                    mostrarMenuServicios();
+                    opcionServicios(br);
                     break;
                
                 case 3:
@@ -104,6 +107,7 @@ public class Main{
             String fechaNacimiento = br.readLine();
 
             System.out.print("Ingrese Tipo de Discapacidad: ");
+            System.out.print("Opciones: Visual, Auditiva, Motriz, Cognitiva, Multiple, Otra");
             String discapacidad = br.readLine();
 
             Beneficiario nuevoBeneficiario = new Beneficiario(rut, nombre, fechaNacimiento, discapacidad);
@@ -160,7 +164,41 @@ public class Main{
         }
     }
 
+    public static void opcionServicios(BufferedReader br) throws IOException {
+        System.out.print("Seleccione una opcion del apartado Servicios y Notas: ");
+        int n = Integer.parseInt(br.readLine());
 
+        switch (n){
+            case 1:
+                agregarServicioApoyo(br);
+                break;
+            case 2:
+                agregarNota(br);
+                break;
+            case 3:
+                listarServiciosApoyo();
+                break;
+            case 4:
+                listarNotas();
+                break;
+            case 5:
+                System.out.println("Volviendo al menu principal...");
+                return;
+            default:
+                System.out.println("Opcion no valida. Intente de nuevo.");
+        }
+                
+    }
+
+    public static void mostrarMenuServicios() {
+        System.out.println("=== Menu Servicios y Notas ===");
+        System.out.println("1. Agregar Servicio de Apoyo");
+        System.out.println("Opciones: Fisioterapia, Terapia Ocupacional, Psicologia, Logopedia, Transporte Especializado, Insercion Laboral, Otro");
+        System.out.println("2. Agregar Nota");
+        System.out.println("3. Listar Servicios de Apoyo");
+        System.out.println("4. Listar Notas");
+        System.out.println("5. Salir");
+    }
 
 
 
