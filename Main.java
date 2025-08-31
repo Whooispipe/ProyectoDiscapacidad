@@ -228,6 +228,10 @@ public class Main{
         agregarServicioApoyo(rut, tipoServicio, descripcion);
     }
 
+    public static void agregarServicioApoyo(String rut, String tipoServicio) {
+    agregarServicioApoyo(rut, tipoServicio, "Sin descripción");
+    }
+
     public static void agregarServicioApoyo(String rut, String tipoServicio, String descripcion){
         Beneficiario b = beneficiarios.get(rut);
         if(b == null){
