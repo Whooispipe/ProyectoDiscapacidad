@@ -69,7 +69,7 @@ public class Main{
     {
         System.out.println("=== Menu Administrador ===");
         System.out.println("1) Apartado de Beneficiarios");
-        System.out.println("2) Apartado de Servicios");
+        System.out.println("2) Apartado de Servicios y Notas");
         System.out.println("3) Salir");
 
     }
