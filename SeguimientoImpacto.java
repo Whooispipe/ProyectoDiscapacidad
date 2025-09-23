@@ -7,6 +7,11 @@ public class SeguimientoImpacto {
         this.efecto = efecto;
     }
 
+    // Sobrecarga 
+    public SeguimientoImpacto(boolean positivo) {
+        this.efecto = positivo ? "Positivo" : "Negativo";
+    }
+
     // Getters y Setters
     public String getEfecto() {
         return efecto;

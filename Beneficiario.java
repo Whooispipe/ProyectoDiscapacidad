@@ -70,5 +70,16 @@ public class Beneficiario {
             this.seguimientoImpacto = seguimientoImpacto;
         }
     }
+
+    //Sobrecarga de métodos
+    public void agregarServicioDeApoyo(ServiciodeApoyo servicio) {
+        if (servicio != null) {
+            this.serviciosDeApoyo.add(servicio);
+        }
+    }
+     public void agregarServicioDeApoyo(String tipo, String descripcion) {
+        ServiciodeApoyo servicio = new ServiciodeApoyo(tipo, descripcion);
+        this.serviciosDeApoyo.add(servicio);
+     }
 }
 
