@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Beneficiario extends Persona {
-    private String rut;
-    private String nombre;
-    private String fechaNacimiento;
     private String discapacidad;
     private List<ServiciodeApoyo> serviciosDeApoyo;
     private List<SeguimientoImpacto> seguimientoImpacto;
