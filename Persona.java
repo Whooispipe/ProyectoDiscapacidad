@@ -41,14 +41,6 @@ public abstract class Persona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    //Método a sobrescribir
-    public String buscarPorRut(String rut) {
-        if (this.rut.equalsIgnoreCase(rut)) {
-            return "Persona encontrada: " + this.rut + ", RUT: " + this.rut;
-        }
-        return "No coincide.";
-    }
-
     //Método abstracto
     public abstract String buscarPorRut(String rut) throws PersonaNoEncontradaException;
 
