@@ -10,38 +10,12 @@ public class Beneficiario extends Persona {
     private List<SeguimientoImpacto> seguimientoImpacto;
 
     public Beneficiario(String rut, String nombre, String fechaNacimiento, String discapacidad) {
-        this.rut = rut;
-        this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
+        super(rut, nombre, fechaNacimiento);
         this.discapacidad = discapacidad;
         this.serviciosDeApoyo = new ArrayList<>();
         this.seguimientoImpacto = new ArrayList<>();
     }
 
-    // Getters y Setters
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
 
     public String getDiscapacidad() {
         return discapacidad;
@@ -70,8 +44,7 @@ public class Beneficiario extends Persona {
             this.seguimientoImpacto = seguimientoImpacto;
         }
     }
-
-    //Sobrecarga de métodos
+    
     public void agregarServicioDeApoyo(ServiciodeApoyo servicio) {
         if (servicio != null) {
             this.serviciosDeApoyo.add(servicio);
@@ -80,6 +53,15 @@ public class Beneficiario extends Persona {
      public void agregarServicioDeApoyo(String tipo, String descripcion) {
         ServiciodeApoyo servicio = new ServiciodeApoyo(tipo, descripcion);
         this.serviciosDeApoyo.add(servicio);
-     }
+    }
+
+    //Sobrecarga de métodos
+    @Override
+    public String buscarPorNombre(String nombre) {
+        if (this.getNombre().equalsIgnoreCase(nombre)) {
+            return "Beneficiario encontrado: " + this.getNombre() + " | Discapacidad: " + discapacidad;
+        }
+        return "No coincide.";
+    }
 }
 
