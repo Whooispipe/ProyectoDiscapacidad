@@ -1,9 +1,16 @@
+import exceptions.PersonaNoEncontradaException;
+import exceptions.RutInvalidoException;
+
 public abstract class Persona {
     private String rut;
     private String nombre;
     private String fechaNacimiento;
 
-    public Persona(String rut, String nombre, String fechaNacimiento) {
+    public Persona(String rut, String nombre, String fechaNacimiento) throws RutInvalidoException {
+        if (!ValidadorRut.validarRut(rut)) {
+            throw new RutInvalidoException("RUT inválido: " + rut);
+        }
+        
         this.rut = rut;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -35,10 +42,14 @@ public abstract class Persona {
     }
 
     //Método a sobrescribir
-    public String buscarPorNombre(String nombre) {
-        if (this.nombre.equalsIgnoreCase(nombre)) {
-            return "Persona encontrada: " + this.nombre + ", RUT: " + this.rut;
+    public String buscarPorRut(String rut) {
+        if (this.rut.equalsIgnoreCase(rut)) {
+            return "Persona encontrada: " + this.rut + ", RUT: " + this.rut;
         }
         return "No coincide.";
     }
+
+    //Método abstracto
+    public abstract String buscarPorRut(String rut) throws PersonaNoEncontradaException;
+
 }

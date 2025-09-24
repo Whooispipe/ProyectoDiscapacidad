@@ -1,3 +1,6 @@
+import exceptions.PersonaNoEncontradaException;
+import exceptions.RutInvalidoException;
+
 public class Funcionario extends Persona {
     private String areaTrabajo;
 
@@ -14,10 +17,10 @@ public class Funcionario extends Persona {
     }
 
     @Override
-    public String buscarPorNombre(String nombre) {
-        if (this.getNombre().equalsIgnoreCase(nombre)) {
+    public String buscarPorRut(String rut) throws PersonaNoEncontradaException{
+        if (this.getRut().equalsIgnoreCase(rut)) {
             return "Funcionario encontrado: " + this.getNombre() + " | Área de Trabajo: " + areaTrabajo;
         }
-        return "No coincide.";
+        throw new PersonaNoEncontradaException("No se encontró al funcionario con RUT: " + rut);
     }
 }

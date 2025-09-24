@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.PersonaNoEncontradaException;
+import exceptions.RutInvalidoException;
+
 public class Beneficiario extends Persona {
     private String discapacidad;
     private List<ServiciodeApoyo> serviciosDeApoyo;
@@ -52,13 +55,13 @@ public class Beneficiario extends Persona {
         this.serviciosDeApoyo.add(servicio);
     }
 
-    //Sobrecarga de métodos
+    //Sobrecarga de método buscarPorRut
     @Override
-    public String buscarPorNombre(String nombre) {
-        if (this.getNombre().equalsIgnoreCase(nombre)) {
+    public String buscarPorRut(String rut) throws PersonaNoEncontradaException{
+        if (this.getRut().equalsIgnoreCase(rut)) {
             return "Beneficiario encontrado: " + this.getNombre() + " | Discapacidad: " + discapacidad;
         }
-        return "No coincide.";
+        throw new PersonaNoEncontradaException("No se encontró al beneficiario con RUT: " + rut);
     }
 }
 

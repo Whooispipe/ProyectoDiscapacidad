@@ -5,7 +5,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     private void initComponents() {
 
         // Botones
