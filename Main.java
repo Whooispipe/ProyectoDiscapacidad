@@ -1,41 +1,19 @@
+
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class Main{
-    private static HashMap<String, Beneficiario> beneficiarios = new HashMap<>();
+    public static HashMap<String, Beneficiario> beneficiarios = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        llenarDatosDePrueba();
-
-        while (true) {
-
-            System.out.print("Seleccione una opcion: ");
-            int opcion = Integer.parseInt(br.readLine());
-
-            switch (opcion) {
-                case 1:
-                    limpiarPantalla();
-                    menuBeneficiarios(br);
-                    break;
-                case 2:
-                    // Apartado de Servicios
-                    limpiarPantalla();
-                    menuServicios(br);
-                    break;
-               
-                case 3:
-                    System.out.println("Saliendo del programa...");
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Opcion no valida. Intente de nuevo.");
-            }
-        presioneParaContinuar();
-        limpiarPantalla();
-        }
+    public static void main(String[] args) {
+        // abrir la ventana principal en el hilo de Swing
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new VentanaPrincipal().setVisible(true);
+        });
     }
     
     public static void llenarDatosDePrueba(){
@@ -55,36 +33,23 @@ public class Main{
         System.out.println("2) Servicios y Notas");
         System.out.println("3) Salir");
     }
-
-    public static void menuBeneficiarios(BufferedReader br) throws IOException{   
-        System.out.println("=== MENÚ BENEFICIARIOS ===");
-        System.out.println("1) Agregar Beneficiario");
-        System.out.println("2) Modificar Beneficiario");
-        System.out.println("3) Eliminar Beneficiario");
-        System.out.println("4) Listar Beneficiarios");
-        System.out.println("5) Volver");
-
-        System.out.print("Seleccione una opción: ");
-        int opcion = Integer.parseInt(br.readLine());
-        switch (opcion) {
-            case 1:
-                agregarBeneficiario(br);
-                break;
-            case 2:
-                modificarBeneficiario(br);
-                break;
-            case 3:
-                eliminarBeneficiario(br);
-                break;
-            case 4:
-                listarBeneficiarios();
-                break;
-            case 5:
-                return;
-            default:
-                System.out.println("Opción no válida.");
-        }
+    public static java.util.List<String> obtenerBeneficiariosTexto() {
+    java.util.List<String> lista = new java.util.ArrayList<>();
+    if (beneficiarios.isEmpty()) {
+        lista.add("No hay beneficiarios registrados.");
+        return lista;
     }
+    for (Beneficiario b : beneficiarios.values()) {
+        lista.add("RUT: " + b.getRut());
+        lista.add("Nombre: " + b.getNombre());
+        lista.add("Fecha de Nacimiento: " + b.getFechaNacimiento());
+        lista.add("Discapacidad: " + b.getDiscapacidad());
+        lista.add("---------------------------");
+    }
+    return lista;
+}
+
+   
     public static void menuServicios(BufferedReader br) throws IOException {
         System.out.println("=== MENÚ SERVICIOS Y NOTAS ===");
         System.out.println("1) Agregar Servicio de Apoyo");
@@ -115,68 +80,38 @@ public class Main{
         }
     }
 
-        public static void agregarBeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT(con este formato 11111111-4): ");
-        String rut = br.readLine();
-        if (beneficiarios.get(rut) == null) {
-            System.out.print("Ingrese Nombre: ");
-            String nombre = br.readLine();
-
-            System.out.print("Ingrese Fecha de Nacimiento (dd/mm/yyyy): ");
-            String fechaNacimiento = br.readLine();
-
-            System.out.print("Ingrese Tipo de Discapacidad: ");
-            System.out.print("Opciones: Visual, Auditiva, Motriz, Cognitiva, Multiple, Otra");
-            String discapacidad = br.readLine();
-
-            Beneficiario nuevoBeneficiario = new Beneficiario(rut, nombre, fechaNacimiento, discapacidad);
-            beneficiarios.put(rut, nuevoBeneficiario);
-            System.out.println("Beneficiario agregado exitosamente.");
-        }
-        else{
-            System.out.println(("EL rut ya esta registrado..."));
-            return;
-        }
+       public static void agregarBeneficiario(String rut, String nombre, String fechaNacimiento, String discapacidad) {
+    if (beneficiarios.get(rut) == null) {
+        Beneficiario nuevo = new Beneficiario(rut, nombre, fechaNacimiento, discapacidad);
+        beneficiarios.put(rut, nuevo);
+        JOptionPane.showMessageDialog(null, "Beneficiario agregado exitosamente.");
+    } else {
+        JOptionPane.showMessageDialog(null, "El RUT ya está registrado.");
     }
+}
 
 
-    public static void modificarBeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT(con este formato 11111111-4): ");
-        String rutInput = br.readLine();
-        Beneficiario b = beneficiarios.get(rutInput);
-        
-        if (b == null) {
-            System.out.println("Beneficiario no encontrado.");
-            return;
-        } else {
-            System.out.print("Ingrese Nuevo Nombre (enter para mantener actual: " + b.getNombre() + "): ");
-            String nombre = br.readLine();
-            if (!nombre.isEmpty()) b.setNombre(nombre);
-
-
-            System.out.print("Ingrese Nueva Fecha de Nacimiento (dd/mm/yyyy) (enter para mantener actual: " + b.getFechaNacimiento() + "): ");
-            String fechaNacimiento = br.readLine();
-            if (!fechaNacimiento.isEmpty()) b.setFechaNacimiento(fechaNacimiento);
-
-
-            System.out.print("Ingrese Nuevo Tipo de Discapacidad (enter para mantener actual: " + b.getDiscapacidad() + "): ");
-            String discapacidadd = br.readLine();
-            if (!discapacidadd.isEmpty()) b.setDiscapacidad(discapacidadd);
-
-            beneficiarios.put(rutInput, b);
-            System.out.println("Beneficiario modificado exitosamente.");
-        }
+    public static void modificarBeneficiario(String rut, String nombre, String fechaNacimiento, String discapacidad) {
+    Beneficiario b = beneficiarios.get(rut);
+    if (b == null) {
+        JOptionPane.showMessageDialog(null, "Beneficiario no encontrado.");
+        return;
     }
+    if (nombre != null && !nombre.isEmpty()) b.setNombre(nombre);
+    if (fechaNacimiento != null && !fechaNacimiento.isEmpty()) b.setFechaNacimiento(fechaNacimiento);
+    if (discapacidad != null && !discapacidad.isEmpty()) b.setDiscapacidad(discapacidad);
 
-    public static void eliminarBeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT del beneficiario a eliminar(con este formato 11111111-4): ");
-        String rutInput = br.readLine();
-        if (beneficiarios.remove(rutInput) != null) {
-            System.out.println("Beneficiario eliminado.");
-        } else {
-            System.out.println("Beneficiario no encontrado.");
-        }
+    JOptionPane.showMessageDialog(null, "Beneficiario modificado exitosamente.");
+}
+
+    public static void eliminarBeneficiario(String rut) {
+    Beneficiario eliminado = beneficiarios.remove(rut);
+    if (eliminado == null) {
+        JOptionPane.showMessageDialog(null, "Beneficiario no encontrado.");
+    } else {
+        JOptionPane.showMessageDialog(null, "Beneficiario eliminado exitosamente.");
     }
+}
 
     public static void listarBeneficiarios() {
         if (beneficiarios.isEmpty()) {
@@ -274,4 +209,3 @@ public class Main{
     }
 }
     
-
