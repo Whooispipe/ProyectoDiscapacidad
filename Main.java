@@ -8,25 +8,22 @@ public class Main{
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        llenarcondatosdepruebea();
+        llenarDatosDePrueba();
+
         while (true) {
 
-            MenuAdministrador();
-            
             System.out.print("Seleccione una opcion: ");
             int opcion = Integer.parseInt(br.readLine());
 
             switch (opcion) {
                 case 1:
                     limpiarPantalla();
-                    mostrarMenuBeneficiario();
-                    opcionadministrador(br);
+                    menuBeneficiarios(br);
                     break;
                 case 2:
                     // Apartado de Servicios
                     limpiarPantalla();
-                    mostrarMenuServicios();
-                    opcionServicios(br);
+                    menuServicios(br);
                     break;
                
                 case 3:
@@ -40,8 +37,8 @@ public class Main{
         limpiarPantalla();
         }
     }
-    public static void llenarcondatosdepruebea()
-    {
+    
+    public static void llenarDatosDePrueba(){
         Beneficiario b1 = new Beneficiario("12345678-9", "Juan Perez", "15/04/1980", "Visual");
         Beneficiario b2 = new Beneficiario("98765432-1", "Maria Gomez", "22/11/1990", "Auditiva");
         Beneficiario b3 = new Beneficiario("11111111-1", "Pedro Martinez", "05/06/1975", "Motriz");
@@ -51,66 +48,77 @@ public class Main{
         beneficiarios.put(b3.getRut(), b3);
         beneficiarios.put(b4.getRut(), b4);
     }
-    public static void opcionadministrador(BufferedReader br) throws IOException
-    {   
-        System.out.print("Seleccione una opcion del apartado Beneficiarios: ");
-        int n = Integer.parseInt(br.readLine());
-        switch (n){
-                case 1:
-                    agregarBeneficiario(br);
-                    break;
-                case 2:
-                    ModificarBeneficiario(br);
-                    break;
-                case 3:
-                    eliminarbeneficiario(br);
-                    break;
-                case 4:
-                    mostrarbeneficiarios();
-                    break;
-                case 5:
-                    System.out.println("Saliendo del programa...");
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Opcion no valida. Intente de nuevo.");
-            }
-        // pausa y limpieza se realizan en el main para evitar duplicar
 
-
+    public static void menuPrincipal() {
+        System.out.println("=== Menu Principal ===");
+        System.out.println("1) Beneficiarios");
+        System.out.println("2) Servicios y Notas");
+        System.out.println("3) Salir");
     }
-    public static void eliminarbeneficiario(BufferedReader br) throws IOException {
-        System.out.print("Ingrese RUT del beneficiario a eliminar(con este formato 11111111-4): ");
-        String rutInput = br.readLine();
-        Beneficiario eliminado = beneficiarios.remove(rutInput);
-        
-        if (eliminado == null) {
-            System.out.println("Beneficiario no encontrado.");
-        } else {
-            System.out.println("Beneficiario eliminado exitosamente.");
+
+    public static void menuBeneficiarios(BufferedReader br) throws IOException{   
+        System.out.println("=== MENÚ BENEFICIARIOS ===");
+        System.out.println("1) Agregar Beneficiario");
+        System.out.println("2) Modificar Beneficiario");
+        System.out.println("3) Eliminar Beneficiario");
+        System.out.println("4) Listar Beneficiarios");
+        System.out.println("5) Volver");
+
+        System.out.print("Seleccione una opción: ");
+        int opcion = Integer.parseInt(br.readLine());
+        switch (opcion) {
+            case 1:
+                agregarBeneficiario(br);
+                break;
+            case 2:
+                modificarBeneficiario(br);
+                break;
+            case 3:
+                eliminarBeneficiario(br);
+                break;
+            case 4:
+                listarBeneficiarios();
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Opción no válida.");
         }
     }
-    public static void MenuAdministrador()
-    {
-        System.out.println("=== Menu Administrador ===");
-        System.out.println("1) Apartado de Beneficiarios");
-        System.out.println("2) Apartado de Servicios y Notas");
-        System.out.println("3) Salir");
+    public static void menuServicios(BufferedReader br) throws IOException {
+        System.out.println("=== MENÚ SERVICIOS Y NOTAS ===");
+        System.out.println("1) Agregar Servicio de Apoyo");
+        System.out.println("2) Agregar Nota");
+        System.out.println("3) Listar Servicios de Apoyo");
+        System.out.println("4) Listar Notas");
+        System.out.println("5) Volver");
 
-    }
-    public static void mostrarMenuBeneficiario() {
-        System.out.println("=== Menu Beneficiarios ===");
-        System.out.println("1. Agregar Beneficiario");
-        System.out.println("2. Modificar Beneficiario");
-        System.out.println("3. Eliminar Beneficiario");
-        System.out.println("4. Listar Beneficiarios");
-        System.out.println("5. Salir");
+        System.out.print("Seleccione una opción: ");
+        int opcion = Integer.parseInt(br.readLine());
+        switch (opcion) {
+            case 1:
+                agregarServicioApoyo(br);
+                break;
+            case 2:
+                agregarNota(br);
+                break;
+            case 3:
+                listarServiciosApoyo();
+                break;
+            case 4:
+                listarNotas();
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Opción no válida.");
+        }
     }
 
-    public static void agregarBeneficiario(BufferedReader br) throws IOException {
+        public static void agregarBeneficiario(BufferedReader br) throws IOException {
         System.out.print("Ingrese RUT(con este formato 11111111-4): ");
         String rut = br.readLine();
-        if(beneficiarios.get(rut) == null){
+        if (beneficiarios.get(rut) == null) {
             System.out.print("Ingrese Nombre: ");
             String nombre = br.readLine();
 
@@ -127,41 +135,50 @@ public class Main{
         }
         else{
             System.out.println(("EL rut ya esta registrado..."));
+            return;
         }
     }
 
-    public static void ModificarBeneficiario(BufferedReader br) throws IOException {
+
+    public static void modificarBeneficiario(BufferedReader br) throws IOException {
         System.out.print("Ingrese RUT(con este formato 11111111-4): ");
         String rutInput = br.readLine();
-        Beneficiario encontrado = beneficiarios.get(rutInput);
+        Beneficiario b = beneficiarios.get(rutInput);
         
-        if (encontrado == null) {
+        if (b == null) {
             System.out.println("Beneficiario no encontrado.");
             return;
         } else {
-            System.out.print("Ingrese Nuevo Nombre (enter para mantener actual: " + encontrado.getNombre() + "): ");
-            String nombres = br.readLine();
-            System.out.print("Ingrese Nueva Fecha de Nacimiento (dd/mm/yyyy) (enter para mantener actual: " + encontrado.getFechaNacimiento() + "): ");
-            String fechaNacimientos = br.readLine();
-            System.out.print("Ingrese Nuevo Tipo de Discapacidad (enter para mantener actual: " + encontrado.getDiscapacidad() + "): ");
+            System.out.print("Ingrese Nuevo Nombre (enter para mantener actual: " + b.getNombre() + "): ");
+            String nombre = br.readLine();
+            if (!nombre.isEmpty()) b.setNombre(nombre);
+
+
+            System.out.print("Ingrese Nueva Fecha de Nacimiento (dd/mm/yyyy) (enter para mantener actual: " + b.getFechaNacimiento() + "): ");
+            String fechaNacimiento = br.readLine();
+            if (!fechaNacimiento.isEmpty()) b.setFechaNacimiento(fechaNacimiento);
+
+
+            System.out.print("Ingrese Nuevo Tipo de Discapacidad (enter para mantener actual: " + b.getDiscapacidad() + "): ");
             String discapacidadd = br.readLine();
+            if (!discapacidadd.isEmpty()) b.setDiscapacidad(discapacidadd);
 
-            if (nombres != null && !nombres.isEmpty()) {
-                encontrado.setNombre(nombres);
-            }
-            if (fechaNacimientos != null && !fechaNacimientos.isEmpty()) {
-                encontrado.setFechaNacimiento(fechaNacimientos);
-            }
-            if (discapacidadd != null && !discapacidadd.isEmpty()) {
-                encontrado.setDiscapacidad(discapacidadd);
-            }
-
-            beneficiarios.put(rutInput, encontrado);
+            beneficiarios.put(rutInput, b);
             System.out.println("Beneficiario modificado exitosamente.");
         }
     }
 
-    public static void mostrarbeneficiarios() {
+    public static void eliminarBeneficiario(BufferedReader br) throws IOException {
+        System.out.print("Ingrese RUT del beneficiario a eliminar(con este formato 11111111-4): ");
+        String rutInput = br.readLine();
+        if (beneficiarios.remove(rutInput) != null) {
+            System.out.println("Beneficiario eliminado.");
+        } else {
+            System.out.println("Beneficiario no encontrado.");
+        }
+    }
+
+    public static void listarBeneficiarios() {
         if (beneficiarios.isEmpty()) {
             System.out.println("No hay beneficiarios registrados.");
             return;
@@ -175,46 +192,12 @@ public class Main{
         }
     }
 
-    public static void mostrarMenuServicios() {
-        System.out.println("=== Menu Servicios y Notas ===");
-        System.out.println("1. Agregar Servicio de Apoyo");
-        System.out.println("2. Agregar Nota");
-        System.out.println("3. Listar Servicios de Apoyo");
-        System.out.println("4. Listar Notas");
-        System.out.println("5. Salir");
-    }
-
-    public static void opcionServicios(BufferedReader br) throws IOException {
-        System.out.print("Seleccione una opcion del apartado Servicios y Notas: ");
-        int n = Integer.parseInt(br.readLine());
-
-        switch (n){
-            case 1:
-                agregarServicioApoyo(br);
-                break;
-            case 2:
-                agregarNota(br);
-                break;
-            case 3:
-                listarServiciosApoyo();
-                break;
-            case 4:
-                listarNotas();
-                break;
-            case 5:
-                System.out.println("Volviendo al menu principal...");
-                return;
-            default:
-                System.out.println("Opcion no valida. Intente de nuevo.");
-        } 
-    }
-
     public static void agregarServicioApoyo(BufferedReader br) throws IOException {
         System.out.print("Ingrese RUT(con este formato 11111111-4):  "); 
         String rut = br.readLine();
         Beneficiario b = beneficiarios.get(rut);
 
-        if (b == null){
+        if (b == null) {
             System.out.println("Beneficiario no encontrado.");
             return;
         }
@@ -225,19 +208,6 @@ public class Main{
         System.out.print("Ingrese Descripcion: ");
         String descripcion = br.readLine();
 
-        agregarServicioApoyo(rut, tipoServicio, descripcion);
-    }
-
-    public static void agregarServicioApoyo(String rut, String tipoServicio) {
-    agregarServicioApoyo(rut, tipoServicio, "Sin descripción");
-    }
-
-    public static void agregarServicioApoyo(String rut, String tipoServicio, String descripcion){
-        Beneficiario b = beneficiarios.get(rut);
-        if(b == null){
-            System.out.println("Beneficiario no encontrado.");
-            return;
-        }
         ServiciodeApoyo nuevoServicio = new ServiciodeApoyo(tipoServicio, descripcion);
         b.getServiciosDeApoyo().add(nuevoServicio);
         System.out.println("Servicio de Apoyo agregado exitosamente.");
@@ -290,42 +260,6 @@ public class Main{
         }
     }
 
-    public static void listarNotas(String rut){
-        Beneficiario b = beneficiarios.get(rut);
-        if (b == null){
-            System.out.println("Beneficiario no encontrado.");
-            return;
-        }
-        System.out.println("Notas de " + b.getNombre() + " (" + b.getRut() + "):");
-        if (b.getSeguimientoImpacto().isEmpty()) {
-            System.out.println("  No tiene notas registradas.");
-        } else {
-            for (SeguimientoImpacto s : b.getSeguimientoImpacto()) {
-                System.out.println("  - Nota: " + s.getEfecto());
-            }
-        }
-    }
-    
-    public static void listarNotas(String rut, String filtro){
-        Beneficiario b = beneficiarios.get(rut);
-        if (b == null){
-            System.out.println("Beneficiario no encontrado.");
-            return;
-        }
-        System.out.println("Notas (" + filtro + ") de " + b.getNombre() + " (" + b.getRut() + "):");
-        boolean found = false;
-        for (SeguimientoImpacto s : b.getSeguimientoImpacto()) {
-            if (s.getEfecto().equalsIgnoreCase(filtro)) {
-                System.out.println("  - Nota: " + s.getEfecto());
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("  No tiene notas de tipo " + filtro + ".");
-        }
-    }
-
-
     // Funciones de utilidad
     // Para limpiar pantalla y poder avanzar con una tecla
     public static void limpiarPantalla() {
@@ -341,4 +275,3 @@ public class Main{
 }
     
 
-//holi
