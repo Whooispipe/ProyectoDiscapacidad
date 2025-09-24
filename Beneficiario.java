@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Beneficiario {
+public class Beneficiario extends Persona {
     private String rut;
     private String nombre;
     private String fechaNacimiento;
