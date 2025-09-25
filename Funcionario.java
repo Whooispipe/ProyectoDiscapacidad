@@ -4,7 +4,7 @@ import exceptions.RutInvalidoException;
 public class Funcionario extends Persona {
     private String areaTrabajo;
 
-    public Funcionario(String rut, String nombre, String fechaNacimiento, String areaTrabajo) {
+    public Funcionario(String rut, String nombre, String fechaNacimiento, String areaTrabajo) throws RutInvalidoException {
         super(rut, nombre, fechaNacimiento);
         this.areaTrabajo = areaTrabajo;
     }

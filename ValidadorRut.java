@@ -23,4 +23,4 @@ public class ValidadorRut {
         return (char) (s != 0 ? s + 47 : 75); // Retorna '0'-'9' o 'K'
     }
 }
-}
+

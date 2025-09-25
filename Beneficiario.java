@@ -9,7 +9,7 @@ public class Beneficiario extends Persona {
     private List<ServiciodeApoyo> serviciosDeApoyo;
     private List<SeguimientoImpacto> seguimientoImpacto;
 
-    public Beneficiario(String rut, String nombre, String fechaNacimiento, String discapacidad) {
+    public Beneficiario(String rut, String nombre, String fechaNacimiento, String discapacidad) throws RutInvalidoException {
         super(rut, nombre, fechaNacimiento);
         this.discapacidad = discapacidad;
         this.serviciosDeApoyo = new ArrayList<>();
